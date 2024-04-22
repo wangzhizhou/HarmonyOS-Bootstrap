@@ -1,3 +1,6 @@
+@Preview({
+  title: 'Tab'
+})
 @Component
 export default struct TabComponent {
   tabInfo = ['Layout', 'Components', 'Router', 'Graphics', 'Animation', 'Interactive']
@@ -24,12 +27,16 @@ export default struct TabComponent {
 
   @Builder
   tabBarBuilder(title: string, index: number) {
-    Column() {
+    Row() {
+      Image($rawfile('number.png'))
+        .width(20)
+        .height(20)
+        .margin({ right: 5 })
       Text(title)
         .fontColor(this.selectedIndex === index ? Color.Orange : Color.Black)
         .fontWeight(this.selectedIndex === index ? FontWeight.Bold : FontWeight.Regular)
-        .padding(20)
     }
+    .padding(20)
     .backgroundColor(Color.Grey)
   }
 }
