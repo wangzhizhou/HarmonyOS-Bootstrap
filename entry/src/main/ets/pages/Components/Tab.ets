@@ -11,8 +11,21 @@ export default struct TabComponent {
     Tabs({ barPosition: BarPosition.Start, controller: this.tabController }) {
       ForEach(this.tabInfo, (tabInfo: string, index: number) => {
         TabContent() {
-          Text(tabInfo)
-            .fontSize(18)
+          NavRouter() {
+            Text(tabInfo)
+              .fontSize(18)
+            NavDestination() {
+              Column() {
+                Text(tabInfo + ' Detail Page')
+                  .fontSize(12)
+              }
+              .height('100%')
+              .justifyContent(FlexAlign.Center)
+            }
+            .title(tabInfo + ' Detail')
+            .hideTitleBar(false)
+            .mode(NavDestinationMode.STANDARD)
+          }
         }
         .tabBar(this.tabBarBuilder(tabInfo, index))
       }, (tabInfo: string) => tabInfo)
