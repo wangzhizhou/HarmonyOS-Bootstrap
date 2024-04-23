@@ -1,24 +1,55 @@
-import Tab from './Components/Tab';
-import { toast } from '../utils/utils';
+import Tab from './Components/Tab'
+import Settings from './Components/Settings'
+import { toast } from '../utils/utils'
 
 @Entry
 @Component
 struct Home {
+  @Provide('pathInfos') pathInfos: NavPathStack = new NavPathStack()
+
   build() {
-    Navigation() {
+    Navigation(this.pathInfos) {
       Tab()
     }
-    .title('Home Page')
-    .titleMode(NavigationTitleMode.Full)
-    .mode(NavigationMode.Auto)
+    .mode(NavigationMode.Stack)
+    .title('HarmonyOS Boostrap')
     .menus([
-      { value: 'Search', icon: 'resources/rawfile/search.png', action: () => toast('Search Menu') },
-      { value: 'Plus', icon: 'resources/rawfile/plus.png', action: () => toast('Plus Menu') },
-      { value: 'More', icon: 'resources/rawfile/more.png', action: () => toast('More Menu') },
+      {
+        value: 'Search',
+        icon: 'resources/rawfile/search.png',
+        action: () => toast('Search Menu')
+      },
+      {
+        value: 'Plus',
+        icon: 'resources/rawfile/plus.png',
+        action: () => toast('Plus Menu')
+      },
+      {
+        value: 'More',
+        icon: 'resources/rawfile/more.png',
+        action: () => toast('More Menu')
+      },
     ])
     .toolbarConfiguration([
-      { value: 'HomeKit', icon: $rawfile('homekit.png'), action: () => toast('Homekit Toolbar') },
-      { value: 'Settings', icon: $rawfile('settings.png'), action: () => toast('Settings Toolbar') },
+      {
+        value: 'HomeKit',
+        icon: $rawfile('homekit.png'),
+        action: () => toast('Homekit Toolbar')
+      },
+      {
+        value: 'Settings',
+        icon: $rawfile('settings.png'),
+        action: () => this.pathInfos.pushPathByName('settings', '')
+      },
     ])
+    .hideToolBar(true)
+    .navDestination(this.navDestinationBuilder)
+  }
+
+  @Builder
+  navDestinationBuilder(path: string) {
+    if (path === 'settings') {
+      Settings()
+    }
   }
 }

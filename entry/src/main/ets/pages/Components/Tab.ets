@@ -1,55 +1,99 @@
+interface ListItem {
+  name: string
+}
+
+interface TabItem {
+  name: string,
+  icon: ResourceStr,
+  listItem: ListItem[]
+}
+
 @Preview({
   title: 'Tab'
 })
 @Component
 export default struct TabComponent {
-  tabInfo = ['Layout', 'Components', 'Router', 'Graphics', 'Animation', 'Interactive']
+  tabItems: TabItem[] = [
+    {
+      name: "ArkTS",
+      icon: $rawfile('arkui.png'),
+      listItem: [
+        { name: 'Attributes' }
+      ]
+    },
+    {
+      name: "ArkUI",
+      icon: $rawfile('arkui.png'),
+      listItem: [
+        { name: 'Layout' },
+        { name: 'Components' },
+        { name: 'Router' },
+        { name: 'Graphics' },
+        { name: 'Animation' },
+        { name: 'Interaction' },
+        { name: 'Theme' },
+      ]
+    }
+  ]
   private tabController: TabsController = new TabsController()
   @State private selectedIndex: number = 0
 
   build() {
-    Tabs({ barPosition: BarPosition.Start, controller: this.tabController }) {
-      ForEach(this.tabInfo, (tabInfo: string, index: number) => {
+    Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
+      ForEach(this.tabItems, (tabItem: TabItem, index: number) => {
         TabContent() {
-          NavRouter() {
-            Text(tabInfo)
-              .fontSize(18)
-            NavDestination() {
-              Column() {
-                Text(tabInfo + ' Detail Page')
-                  .fontSize(12)
+          List() {
+            ForEach(tabItem.listItem, (listItem: ListItem, index: number) => {
+              ListItem() {
+                NavRouter() {
+                  Row() {
+                    Text(listItem.name)
+                      .fontSize(18)
+                      .margin({ left: 20 })
+                    Blank()
+                    Image($rawfile('right_arrow.png'))
+                      .height(15)
+                      .margin({ right: 20 })
+                  }
+                  .width('100%')
+                  .height(60)
+
+                  NavDestination() {
+                    Column() {
+                      Text(listItem.name)
+                        .fontSize(12)
+                    }
+                    .height('100%')
+                    .justifyContent(FlexAlign.Center)
+                  }
+                  .title(tabItem.name)
+                  .mode(NavDestinationMode.STANDARD)
+                }
               }
-              .height('100%')
-              .justifyContent(FlexAlign.Center)
-            }
-            .title(tabInfo + ' Detail')
-            .hideTitleBar(false)
-            .mode(NavDestinationMode.STANDARD)
+            }, (listItem: ListItem) => listItem.name)
           }
+          .height('100%')
         }
-        .tabBar(this.tabBarBuilder(tabInfo, index))
-      }, (tabInfo: string) => tabInfo)
+        .tabBar(this.tabBarBuilder(tabItem, index))
+        .tabIndex(index)
+      }, (tabItem: TabItem) => tabItem.name)
     }
-    .vertical(false)
-    .scrollable(true)
     .onChange((index: number) => {
       this.selectedIndex = index
     })
-    .barMode(BarMode.Scrollable)
   }
 
   @Builder
-  tabBarBuilder(title: string, index: number) {
+  tabBarBuilder(tabItem: TabItem, index: number) {
     Row() {
-      Image($rawfile('number.png'))
+      Image(tabItem.icon)
         .width(20)
         .height(20)
         .margin({ right: 5 })
-      Text(title)
-        .fontColor(this.selectedIndex === index ? Color.Orange : Color.Black)
+        .colorBlend(this.selectedIndex === index ? Color.Blue : Color.Black)
+      Text(tabItem.name)
+        .fontColor(this.selectedIndex === index ? Color.Blue : Color.Black)
         .fontWeight(this.selectedIndex === index ? FontWeight.Bold : FontWeight.Regular)
     }
-    .padding(20)
-    .backgroundColor(Color.Grey)
   }
 }
