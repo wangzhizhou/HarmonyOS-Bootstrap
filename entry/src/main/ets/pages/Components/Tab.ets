@@ -1,12 +1,4 @@
-interface ListItem {
-  name: string
-}
-
-interface TabItem {
-  name: string,
-  icon: ResourceStr,
-  listItem: ListItem[]
-}
+import ItemList, { TabItem } from '../Components/List/ItemList';
 
 @Preview({
   title: 'Tab'
@@ -16,9 +8,11 @@ export default struct TabComponent {
   tabItems: TabItem[] = [
     {
       name: "ArkTS",
-      icon: $rawfile('arkui.png'),
+      icon: $rawfile('arkts.png'),
       listItem: [
-        { name: 'Attributes' }
+        { name: 'Basic Syntax' },
+        { name: 'State Manager' },
+        { name: 'Render Control' },
       ]
     },
     {
@@ -42,37 +36,8 @@ export default struct TabComponent {
     Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
       ForEach(this.tabItems, (tabItem: TabItem, index: number) => {
         TabContent() {
-          List() {
-            ForEach(tabItem.listItem, (listItem: ListItem, index: number) => {
-              ListItem() {
-                NavRouter() {
-                  Row() {
-                    Text(listItem.name)
-                      .fontSize(18)
-                      .margin({ left: 20 })
-                    Blank()
-                    Image($rawfile('right_arrow.png'))
-                      .height(15)
-                      .margin({ right: 20 })
-                  }
-                  .width('100%')
-                  .height(60)
-
-                  NavDestination() {
-                    Column() {
-                      Text(listItem.name)
-                        .fontSize(12)
-                    }
-                    .height('100%')
-                    .justifyContent(FlexAlign.Center)
-                  }
-                  .title(tabItem.name)
-                  .mode(NavDestinationMode.STANDARD)
-                }
-              }
-            }, (listItem: ListItem) => listItem.name)
-          }
-          .height('100%')
+          ItemList({tabItem: tabItem})
+            .padding({ top: 10 })
         }
         .tabBar(this.tabBarBuilder(tabItem, index))
         .tabIndex(index)
@@ -87,7 +52,6 @@ export default struct TabComponent {
   tabBarBuilder(tabItem: TabItem, index: number) {
     Row() {
       Image(tabItem.icon)
-        .width(20)
         .height(20)
         .margin({ right: 5 })
         .colorBlend(this.selectedIndex === index ? Color.Blue : Color.Black)
