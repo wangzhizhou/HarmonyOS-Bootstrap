@@ -1,10 +1,40 @@
 import Tab from './Components/Tab'
-import Settings from './Components/Settings'
 import { toast } from '../utils/utils'
+import navDestinationBuilder from './navConfig'
 
 @Entry
 @Component
 struct Home {
+  menuItems: NavigationMenuItem[] = [
+    {
+      value: 'Search',
+      icon: 'resources/rawfile/search.png',
+      action: () => toast('Search Menu')
+    },
+    {
+      value: 'Plus',
+      icon: 'resources/rawfile/plus.png',
+      action: () => toast('Plus Menu')
+    },
+    {
+      value: 'More',
+      icon: 'resources/rawfile/more.png',
+      action: () => toast('More Menu')
+    },
+  ]
+  toolbarItems: ToolbarItem[] = [
+    {
+      value: 'HomeKit',
+      icon: $rawfile('homekit.png'),
+      action: () => toast('Homekit Toolbar')
+    },
+    {
+      value: 'Settings',
+      icon: $rawfile('settings.png'),
+      action: () => this.pathInfos.pushPathByName('settings', '')
+    },
+  ]
+  title: string = 'HarmonyOS Boostrap'
   @Provide('pathInfos') pathInfos: NavPathStack = new NavPathStack()
 
   build() {
@@ -12,44 +42,11 @@ struct Home {
       Tab()
     }
     .mode(NavigationMode.Stack)
-    .title('HarmonyOS Boostrap')
-    .menus([
-      {
-        value: 'Search',
-        icon: 'resources/rawfile/search.png',
-        action: () => toast('Search Menu')
-      },
-      {
-        value: 'Plus',
-        icon: 'resources/rawfile/plus.png',
-        action: () => toast('Plus Menu')
-      },
-      {
-        value: 'More',
-        icon: 'resources/rawfile/more.png',
-        action: () => toast('More Menu')
-      },
-    ])
-    .toolbarConfiguration([
-      {
-        value: 'HomeKit',
-        icon: $rawfile('homekit.png'),
-        action: () => toast('Homekit Toolbar')
-      },
-      {
-        value: 'Settings',
-        icon: $rawfile('settings.png'),
-        action: () => this.pathInfos.pushPathByName('settings', '')
-      },
-    ])
+    .title(this.title)
+    .menus(this.menuItems)
+    .menus([])
+    .toolbarConfiguration(this.toolbarItems)
     .hideToolBar(true)
-    .navDestination(this.navDestinationBuilder)
-  }
-
-  @Builder
-  navDestinationBuilder(path: string) {
-    if (path === 'settings') {
-      Settings()
-    }
+    .navDestination(navDestinationBuilder)
   }
 }

@@ -11,7 +11,7 @@ export default struct TabComponent {
       icon: $rawfile('arkts.png'),
       listItem: [
         { name: 'Basic Syntax' },
-        { name: 'State Manager' },
+        { name: 'State Manage' },
         { name: 'Render Control' },
       ]
     },
@@ -36,7 +36,7 @@ export default struct TabComponent {
     Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
       ForEach(this.tabItems, (tabItem: TabItem, index: number) => {
         TabContent() {
-          ItemList({tabItem: tabItem})
+          ItemList({ tabItem: tabItem })
             .padding({ top: 10 })
         }
         .tabBar(this.tabBarBuilder(tabItem, index))
