@@ -49,4 +49,16 @@ struct Home {
     .hideToolBar(true)
     .navDestination(navDestinationBuilder)
   }
+
+  onPageShow(): void {
+    toast('Page Show (Home)')
+  }
+
+  onPageHide(): void {
+    toast('Page Hide (Home)')
+  }
+
+  onBackPress(): boolean | void {
+    toast('Back Press (Home)')
+  }
 }

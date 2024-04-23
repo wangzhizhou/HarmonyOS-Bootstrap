@@ -1,8 +1,15 @@
+import { toast } from '../../../utils/utils';
+
+class RefParam {
+  text: string = ''
+}
+
 @Preview
 @Component
 export default struct BasicSyntax {
   @State title: string = 'Basic Syntax'
   @State count: number = 0
+  @State text: string = 'origin value'
 
   build() {
     NavDestination() {
@@ -31,7 +38,7 @@ export default struct BasicSyntax {
         Row({ space: 5 }) {
           Button('count + 1')
             .onClick(() => {
-              this.count += 1
+              this.count++
             })
           Button('count + 2')
             .onClick(this.arrowFunc)
@@ -43,6 +50,12 @@ export default struct BasicSyntax {
         Blank()
 
         MyCustomComponent()
+        this.valuePassBuilder(this.text)
+        this.refPassBuilder({ text: this.text })
+        Button('change origin value to new value')
+          .onClick(() => {
+            this.text = `new value ${this.count++}`
+          })
       }
       .height('100%')
       .width('100%')
@@ -53,6 +66,16 @@ export default struct BasicSyntax {
 
   arrowFunc = () => {
     this.count += 2
+  }
+
+  @Builder
+  valuePassBuilder(text: string) {
+    Text(`value pass builder: ${text}`)
+  }
+
+  @Builder
+  refPassBuilder($$: RefParam) {
+    Text(`ref pass builder: ${$$.text}`)
   }
 }
 
@@ -68,5 +91,25 @@ struct MyCustomComponent {
       .onClick(() => {
         this.message = 'My Custom Component Clicked'
       })
+  }
+
+  aboutToAppear(): void {
+    toast('about to appear (MyCustomComponent)')
+  }
+
+  aboutToDisappear(): void {
+    toast('about to disappear (MyCustomComponent)')
+  }
+
+  onPageShow(): void {
+    toast('page show (MyCustomComponent)')
+  }
+
+  onPageHide(): void {
+    toast('page hide (MyCustomComponent)')
+  }
+
+  onBackPress(): boolean | void {
+    toast('back press (MyCustomComponent)')
   }
 }
