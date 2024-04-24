@@ -3,6 +3,8 @@ import BasicSyntax from './HarmonyOS/ArtTS/BasicSyntax'
 import StateManage from './HarmonyOS/ArtTS/StateManage'
 import RenderControl from './HarmonyOS/ArtTS/RenderControl'
 
+import PermissionsComponent from './HarmonyOS/ArkUI/Permissions'
+
 @Builder
 export default function navDestinationBuilder(path: string) {
   if (path === 'settings') {
@@ -13,7 +15,10 @@ export default function navDestinationBuilder(path: string) {
     StateManage()
   } else if (path === 'Render Control') {
     RenderControl()
+  } else if (path === 'Permissions') {
+    PermissionsComponent()
   }
+
   else {
     NavDestination() {
       Column() {

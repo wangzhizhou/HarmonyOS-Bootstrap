@@ -1,6 +1,4 @@
 import { toast } from '../../../utils/utils';
-import { checkAccessToken, requestPermissionFromUser } from '../../../utils/permissions';
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 
 class RefParam {
   text: string = ''
@@ -12,7 +10,6 @@ export default struct BasicSyntax {
   @State title: string = 'Basic Syntax'
   @State count: number = 0
   @State text: string = 'origin value'
-  permission: Permissions = 'ohos.permission.READ_CALENDAR'
 
   build() {
     NavDestination() {
@@ -71,41 +68,12 @@ export default struct BasicSyntax {
           .onClick(() => {
             this.text = `new value ${this.count++}`
           })
-
-        Button('校验读日历权限')
-          .onClick(() => {
-            checkAccessToken(this.permission).then((grantStatus: abilityAccessCtrl.GrantStatus) => {
-              if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-                // 已经授权，可以继续访问目标操作
-                toast("校验：读日历权限已授权")
-              } else {
-                // 申请日历权限
-                toast("校验：读日历权限未授权")
-              }
-            })
-          })
-        Button('请求用户读日历权限')
-          .onClick(() => {
-            this.requestPermission()
-          })
       }
       .height('100%')
       .width('100%')
       .justifyContent(FlexAlign.Center)
     }
     .title(this.title)
-  }
-
-  requestPermission() {
-    requestPermissionFromUser(this, this.permission).then((grantStatus: abilityAccessCtrl.GrantStatus) => {
-      if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-        // 已经授权，可以继续访问目标操作
-        toast("请求：读日历权限已授权")
-      } else {
-        // 申请日历权限
-        toast("请求：读日历权限未授权")
-      }
-    })
   }
 
   arrowFunc = () => {

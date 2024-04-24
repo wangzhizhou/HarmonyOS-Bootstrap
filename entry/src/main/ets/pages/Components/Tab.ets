@@ -26,6 +26,8 @@ export default struct TabComponent {
         { name: 'Animation' },
         { name: 'Interaction' },
         { name: 'Theme' },
+        { name: 'Web' },
+        { name: 'Permissions' },
       ]
     }
   ]

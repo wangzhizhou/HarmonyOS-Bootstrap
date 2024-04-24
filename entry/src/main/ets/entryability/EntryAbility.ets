@@ -1,9 +1,6 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { requestPermissionFromUser } from '../utils/permissions';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { toast } from '../utils/utils';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
