@@ -11,6 +11,14 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "network_permission_reason",
+      "value": "请求网络权限以访问网络图片时"
+    },
+    {
+      "name": "calendar_permission_reason",
+      "value": "请求日历权限"
     }
   ]
 }

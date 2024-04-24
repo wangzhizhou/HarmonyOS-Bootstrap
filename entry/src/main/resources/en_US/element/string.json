@@ -11,6 +11,14 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "network_permission_reason",
+      "value": "request network permission when access network image"
+    },
+    {
+      "name": "calendar_permission_reason",
+      "value": "request calendar permission"
     }
   ]
 }
