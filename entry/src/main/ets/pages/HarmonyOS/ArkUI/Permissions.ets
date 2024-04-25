@@ -100,7 +100,7 @@ export default struct PermissionsComponent {
       .height('94%')
       .justifyContent(FlexAlign.Center)
     }
-    .title('Permissions')
+    .title(`Permissions(${this.permissions.length})`)
   }
 
   requestPermission() {
