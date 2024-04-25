@@ -66,9 +66,12 @@ export function getUIAbilityContext(object: Object): common.UIAbilityContext {
 export async function openPermissionsInSystemSettings(context: common.UIAbilityContext): Promise<void> {
   let bundle = await bundleInfo()
   let wantInfo: Want = {
+    bundleName: 'com.huawei.hmos.settings',
+    abilityName: 'com.huawei.hmos.settings.MainAbility',
+    uri: 'application_info_entry',
     action: 'action.settings.app.info',
     parameters: {
-      settingsParamBundleName: bundle.name // 打开指定应用的详情页面
+      pushParams: bundle.name // 打开指定应用的详情页面
     }
   }
   await context.startAbility(wantInfo)
