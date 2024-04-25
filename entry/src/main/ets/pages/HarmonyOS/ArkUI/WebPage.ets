@@ -39,7 +39,9 @@ struct WebPage {
             .onClick(() => {
               switch (button.type) {
                 case 'back':
-                  this.webController.backward()
+                  if (this.webController.accessBackward()) {
+                    this.webController.backward()
+                  }
                   break
                 case 'refresh':
                   this.webController.refresh()
@@ -48,7 +50,9 @@ struct WebPage {
                   this.webController.stop()
                   break
                 case 'forward':
-                  this.webController.forward()
+                  if (this.webController.accessForward()) {
+                    this.webController.forward()
+                  }
                   break
               }
             })

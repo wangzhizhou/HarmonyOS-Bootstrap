@@ -5,6 +5,7 @@ import RenderControl from './HarmonyOS/ArtTS/RenderControl'
 
 import PermissionsComponent from './HarmonyOS/ArkUI/Permissions'
 import WebPage from './HarmonyOS/ArkUI/WebPage'
+import LayoutPage from './HarmonyOS/ArkUI/LayoutPage'
 
 @Builder
 export default function navDestinationBuilder(path: string) {
@@ -20,9 +21,9 @@ export default function navDestinationBuilder(path: string) {
     PermissionsComponent()
   } else if (path === 'Web') {
     WebPage()
-  }
-
-  else {
+  } else if (path === 'Layout') {
+    LayoutPage()
+  } else {
     NavDestination() {
       Column() {
         Text(path)
