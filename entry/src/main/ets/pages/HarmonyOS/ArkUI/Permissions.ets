@@ -1,4 +1,10 @@
-import { checkAccessToken, requestPermissionFromUser, allPermissions } from '../../../utils/permissions'
+import {
+  checkAccessToken,
+  requestPermissionFromUser,
+  allPermissions,
+  openPermissionsInSystemSettings,
+  getUIAbilityContext
+} from '../../../utils/permissions'
 import { toast, setPasteboardString } from '../../../utils/utils'
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl'
 
@@ -62,6 +68,10 @@ export default struct PermissionsComponent {
             Button('请求')
               .onClick(() => {
                 this.requestPermission()
+              })
+            Button('跳转设置页')
+              .onClick(() => {
+                openPermissionsInSystemSettings(getUIAbilityContext(this))
               })
           }
           .width('100%')

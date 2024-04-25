@@ -1,7 +1,18 @@
 import bundleManager from '@ohos.bundle.bundleManager';
-import abilityAccessCtrl, { Context, PermissionRequestResult, Permissions } from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { PermissionRequestResult, Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import common from '@ohos.app.ability.common';
+import Want from '@ohos.app.ability.Want';
+import UIAbility from '@ohos.app.ability.UIAbility';
+
+async function bundleInfo(): Promise<bundleManager.BundleInfo> {
+  return await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
+}
+
+async function appInfo(): Promise<bundleManager.ApplicationInfo> {
+  let bundle: bundleManager.BundleInfo = await bundleInfo();
+  return bundle.appInfo
+}
 
 export async function checkAccessToken(permission: Permissions): Promise<abilityAccessCtrl.GrantStatus> {
   let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
@@ -10,9 +21,8 @@ export async function checkAccessToken(permission: Permissions): Promise<ability
   // 获取应用程序的accessTokenID
   let tokenId: number = 0;
   try {
-    let bundleInfo: bundleManager.BundleInfo = await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
-    let appInfo: bundleManager.ApplicationInfo = bundleInfo.appInfo;
-    tokenId = appInfo.accessTokenId;
+    let app = await appInfo();
+    tokenId = app.accessTokenId;
   } catch (error) {
     let err: BusinessError = error as BusinessError;
     console.error(`Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`);
@@ -31,7 +41,7 @@ export async function checkAccessToken(permission: Permissions): Promise<ability
 
 export async function requestPermissionFromUser(caller: Object, permission: Permissions): Promise<abilityAccessCtrl.GrantStatus> {
   let grantStatus: abilityAccessCtrl.GrantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_DENIED;
-  let context: Context = getContext(caller) as common.UIAbilityContext || caller as Context;
+  let context: common.UIAbilityContext = getUIAbilityContext(caller)
   try {
     let requestResults: PermissionRequestResult = await abilityAccessCtrl.createAtManager()
       .requestPermissionsFromUser(context, [permission])
@@ -45,6 +55,22 @@ export async function requestPermissionFromUser(caller: Object, permission: Perm
     console.error(`Failed to check access token. Code is ${err.code}, message is ${err.message}`);
   }
   return grantStatus;
+}
+
+export function getUIAbilityContext(object: Object): common.UIAbilityContext {
+  let context: common.UIAbilityContext = (object instanceof UIAbility) ? object.context : (getContext(object) as common.UIAbilityContext || object as common.UIAbilityContext);
+  return context
+}
+
+export async function openPermissionsInSystemSettings(context: common.UIAbilityContext): Promise<void> {
+  let bundle = await bundleInfo()
+  let wantInfo: Want = {
+    action: 'action.settings.app.info',
+    parameters: {
+      settingsParamBundleName: bundle.name // 打开指定应用的详情页面
+    }
+  }
+  await context.startAbility(wantInfo)
 }
 
 export const allPermissions: Permissions[] = [
