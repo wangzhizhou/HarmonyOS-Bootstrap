@@ -29,6 +29,11 @@ export default struct PermissionsComponent {
           this.permissions = allPermissions.filter((permission: Permissions) => {
             return permission.toLowerCase().includes(value.toLowerCase())
           })
+          this.selectedIndex = undefined
+          if (this.selectedPermission) {
+            const index = this.permissions.indexOf(this.selectedPermission)
+            this.selectedIndex = index >= 0 ? index : undefined
+          }
         })
         .height('6%')
       Column() {
@@ -43,7 +48,7 @@ export default struct PermissionsComponent {
                     .fontSize(10)
                     .margin({ left: 20 })
                   Blank()
-                  if (this.searchKeyword.length === 0 && this.selectedIndex === index) {
+                  if (this.selectedIndex === index) {
                     Image($rawfile('check.png'))
                       .margin({ right: 10 })
                       .height(20)
@@ -60,7 +65,7 @@ export default struct PermissionsComponent {
             .height(30)
             .onClick(() => {
               this.selectedIndex = index
-              this.selectedPermission = allPermissions[this.selectedIndex]
+              this.selectedPermission = this.permissions[this.selectedIndex]
               setPasteboardString(this.selectedPermission).then(() => {
                 toast('已复制')
               })
@@ -68,12 +73,12 @@ export default struct PermissionsComponent {
           }, (permission: Permissions) => permission)
         }
         .width('100%')
-        .height(this.searchKeyword.length === 0 && this.selectedIndex ? '92%' : '100%')
+        .height(this.selectedPermission ? '92%' : '100%')
         .onScroll(() => {
           this.searchController.stopEditing()
         })
 
-        if (this.searchKeyword.length === 0 && this.selectedIndex) {
+        if (this.selectedPermission) {
           Row() {
             Button('校验')
               .onClick(() => {
