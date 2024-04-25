@@ -1,7 +1,7 @@
 import {
-  checkAccessToken,
   requestPermissionFromUser,
   allPermissions,
+  checkAccessToken,
   openPermissionsInSystemSettings,
   getUIAbilityContext
 } from '../../../utils/permissions'
@@ -13,12 +13,27 @@ import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl'
 export default struct PermissionsComponent {
   @State selectedIndex: number | undefined = undefined
   @State selectedPermission: Permissions | undefined = undefined
+  @State searchKeyword: string = ''
+  @State permissions: Permissions[] = allPermissions
+  searchController: SearchController = new SearchController()
 
   build() {
     NavDestination() {
+      Search({ placeholder: '输入权限名称', value: this.searchKeyword, controller: this.searchController })
+        .placeholderColor(Color.Gray)
+        .enableKeyboardOnFocus(false)
+        .type(SearchType.NORMAL)
+        .margin({ left: 5, right: 5, bottom: 10 })
+        .onChange((value: string) => {
+          this.searchKeyword = value
+          this.permissions = allPermissions.filter((permission: Permissions) => {
+            return permission.toLowerCase().includes(value.toLowerCase())
+          })
+        })
+        .height('6%')
       Column() {
         List({ initialIndex: 0, space: 2 }) {
-          ForEach(allPermissions, (permission: Permissions, index: number) => {
+          ForEach(this.permissions, (permission: Permissions, index: number) => {
             ListItem() {
               Column() {
                 Row() {
@@ -28,7 +43,7 @@ export default struct PermissionsComponent {
                     .fontSize(10)
                     .margin({ left: 20 })
                   Blank()
-                  if (this.selectedIndex === index) {
+                  if (this.searchKeyword.length === 0 && this.selectedIndex === index) {
                     Image($rawfile('check.png'))
                       .margin({ right: 10 })
                       .height(20)
@@ -53,9 +68,12 @@ export default struct PermissionsComponent {
           }, (permission: Permissions) => permission)
         }
         .width('100%')
-        .height(this.selectedIndex ? '90%' : '100%')
+        .height(this.searchKeyword.length === 0 && this.selectedIndex ? '92%' : '100%')
+        .onScroll(() => {
+          this.searchController.stopEditing()
+        })
 
-        if (this.selectedIndex) {
+        if (this.searchKeyword.length === 0 && this.selectedIndex) {
           Row() {
             Button('校验')
               .onClick(() => {
@@ -75,11 +93,11 @@ export default struct PermissionsComponent {
               })
           }
           .width('100%')
-          .height('10%')
+          .height('8%')
           .justifyContent(FlexAlign.SpaceEvenly)
         }
       }
-      .height('100%')
+      .height('94%')
       .justifyContent(FlexAlign.Center)
     }
     .title('Permissions')
