@@ -17,8 +17,10 @@ export default struct PermissionsComponent {
               Column() {
                 Row() {
                   Text(permission)
+                    .fontWeight(FontWeight.Medium)
                     .maxLines(1)
                     .fontSize(10)
+                    .margin({ left: 20 })
                   Blank()
                   if (this.selectedIndex === index) {
                     Image($rawfile('check.png'))
@@ -26,8 +28,11 @@ export default struct PermissionsComponent {
                       .height(20)
                   }
                 }
+                .borderRadius(5)
+                .backgroundColor('#0F000000')
                 .justifyContent(FlexAlign.Start)
                 .width('100%')
+                .height('100%')
               }
               .padding({ left: 5, right: 5 })
             }
@@ -43,21 +48,15 @@ export default struct PermissionsComponent {
 
         if (this.selectedIndex) {
           Row() {
-            Button('校验读权限')
+            Button('校验')
               .onClick(() => {
                 if (this.selectedPermission) {
                   checkAccessToken(this.selectedPermission).then((grantStatus: abilityAccessCtrl.GrantStatus) => {
-                    if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-                      // 已经授权，可以继续访问目标操作
-                      toast("校验：已授权")
-                    } else {
-                      // 申请日历权限
-                      toast("校验：未授权")
-                    }
+                    this.toastGrantStatus(grantStatus)
                   })
                 }
               })
-            Button('请求权限')
+            Button('请求')
               .onClick(() => {
                 this.requestPermission()
               })
@@ -76,14 +75,18 @@ export default struct PermissionsComponent {
   requestPermission() {
     if (this.selectedPermission) {
       requestPermissionFromUser(this, this.selectedPermission).then((grantStatus: abilityAccessCtrl.GrantStatus) => {
-        if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          // 已经授权，可以继续访问目标操作
-          toast("请求：权限已授权")
-        } else {
-          // 申请日历权限
-          toast("请求：权限未授权")
-        }
+        this.toastGrantStatus(grantStatus)
       })
+    }
+  }
+
+  toastGrantStatus(grantStatus: abilityAccessCtrl.GrantStatus) {
+    if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      // 已经授权，可以继续访问目标操作
+      toast('已授权')
+    } else {
+      // 申请日历权限
+      toast('未授权(确认配置文件是否声明此权限)', 3000)
     }
   }
 }

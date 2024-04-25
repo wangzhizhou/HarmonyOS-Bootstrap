@@ -1,8 +1,9 @@
 import promptAction from '@ohos.promptAction';
 import { router } from '@kit.ArkUI';
 
-export function toast(content: string) {
-  promptAction.showToast({ message: content })
+export function toast(content: string, duration: number = 1500) {
+
+  promptAction.showToast({ message: content, duration: duration })
 }
 
 export function pushPage(url: string) {

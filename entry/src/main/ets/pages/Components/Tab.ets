@@ -32,10 +32,10 @@ export default struct TabComponent {
     }
   ]
   private tabController: TabsController = new TabsController()
-  @State private selectedIndex: number = 0
+  @State private selectedIndex: number = 1
 
   build() {
-    Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
+    Tabs({ barPosition: BarPosition.End, controller: this.tabController, index: this.selectedIndex }) {
       ForEach(this.tabItems, (tabItem: TabItem, index: number) => {
         TabContent() {
           ItemList({ tabItem: tabItem })
