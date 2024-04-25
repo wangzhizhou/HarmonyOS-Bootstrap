@@ -1,5 +1,5 @@
 import { checkAccessToken, requestPermissionFromUser, allPermissions } from '../../../utils/permissions'
-import { toast } from '../../../utils/utils'
+import { toast, setPasteboardString } from '../../../utils/utils'
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl'
 
 @Entry
@@ -40,6 +40,9 @@ export default struct PermissionsComponent {
             .onClick(() => {
               this.selectedIndex = index
               this.selectedPermission = allPermissions[this.selectedIndex]
+              setPasteboardString(this.selectedPermission).then(() => {
+                toast('已复制')
+              })
             })
           }, (permission: Permissions) => permission)
         }
