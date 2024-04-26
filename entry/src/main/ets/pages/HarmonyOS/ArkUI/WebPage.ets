@@ -5,10 +5,15 @@ interface ButtonInfo {
   type: 'back' | 'refresh' | 'close' | 'forward'
 }
 
+Environment.envProp('accessibilityEnabled', false);
+
 @Entry
 @Component
 struct WebPage {
+  @StorageProp('accessibilityEnabled') accessibilityEnabled: boolean = false;
   webController: webview.WebviewController = new webview.WebviewController()
+  textInputController: TextInputController = new TextInputController()
+  @State textInput: string = ''
   @State url: string = 'developer.apple.com'
   @State progress: number = 0
   btns: ButtonInfo[] = [
@@ -31,36 +36,53 @@ struct WebPage {
           }
         })
         .height('90%')
-      Row() {
-        ForEach(this.btns, (button: ButtonInfo) => {
-          Image(button.icon)
-            .height(30)
-            .margin(10)
-            .onClick(() => {
-              switch (button.type) {
-                case 'back':
-                  if (this.webController.accessBackward()) {
-                    this.webController.backward()
+
+      Column() {
+        Row() {
+          Row() {
+            ForEach(this.btns, (button: ButtonInfo) => {
+              Image(button.icon)
+                .height(20)
+                .margin(5)
+                .onClick(() => {
+                  switch (button.type) {
+                    case 'back':
+                      if (this.webController.accessBackward()) {
+                        this.webController.backward()
+                      }
+                      break
+                    case 'refresh':
+                      this.webController.refresh()
+                      break
+                    case 'close':
+                      this.webController.stop()
+                      break
+                    case 'forward':
+                      if (this.webController.accessForward()) {
+                        this.webController.forward()
+                      }
+                      break
                   }
-                  break
-                case 'refresh':
-                  this.webController.refresh()
-                  break
-                case 'close':
-                  this.webController.stop()
-                  break
-                case 'forward':
-                  if (this.webController.accessForward()) {
-                    this.webController.forward()
-                  }
-                  break
-              }
+                })
             })
-        })
+          }
+          .width('30%')
+
+          TextInput({ placeholder: '请输入网址', text: this.textInput, controller: this.textInputController })
+            .margin({ left: 5, right: 5, bottom: 5 })
+            .onChange((text: string) => {
+              this.textInput = text
+            })
+            .onSubmit(() => {
+              this.webController.loadUrl(this.textInput)
+            })
+            .width('60%')
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.SpaceAround)
       }
-      .width('100%')
       .height('10%')
-      .justifyContent(FlexAlign.SpaceBetween)
+      .padding({ top: 5, bottom: 5 })
     }
     .title('Web')
   }
