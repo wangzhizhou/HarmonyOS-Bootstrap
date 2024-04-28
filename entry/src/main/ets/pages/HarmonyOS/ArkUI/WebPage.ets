@@ -16,6 +16,7 @@ struct WebPage {
   @State textInput: string = ''
   @State url: string = 'developer.apple.com'
   @State progress: number = 0
+  @State darkMode: WebDarkMode = WebDarkMode.Auto
   btns: ButtonInfo[] = [
     { icon: $rawfile('left.png'), type: 'back' },
     { icon: $rawfile('right.png'), type: 'forward' },
@@ -35,6 +36,7 @@ struct WebPage {
             this.progress = event.newProgress
           }
         })
+        .darkMode(this.darkMode)
         .height('90%')
 
       Column() {

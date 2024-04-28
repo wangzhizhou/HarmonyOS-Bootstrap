@@ -6,7 +6,7 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
-    let isDark = true
+    let isDark = false
     this.context.getApplicationContext().setColorMode(isDark ? ConfigurationConstant.ColorMode.COLOR_MODE_DARK : ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT)
     AppStorage.set('currentColorMode', this.context.config.colorMode)
 
