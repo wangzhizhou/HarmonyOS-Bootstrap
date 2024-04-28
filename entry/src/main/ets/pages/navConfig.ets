@@ -3,9 +3,10 @@ import BasicSyntax from './HarmonyOS/ArtTS/BasicSyntax'
 import StateManage from './HarmonyOS/ArtTS/StateManage'
 import RenderControl from './HarmonyOS/ArtTS/RenderControl'
 
-import PermissionsComponent from './HarmonyOS/ArkUI/Permissions'
+import PermissionsComponent from './HarmonyOS/ArkUI/PermissionsPage'
 import WebPage from './HarmonyOS/ArkUI/WebPage'
 import LayoutPage from './HarmonyOS/ArkUI/LayoutPage'
+import ThemePage from './HarmonyOS/ArkUI/ThemePage'
 
 @Builder
 export default function navDestinationBuilder(path: string) {
@@ -23,6 +24,8 @@ export default function navDestinationBuilder(path: string) {
     WebPage()
   } else if (path === 'Layout') {
     LayoutPage()
+  } else if (path === 'Theme') {
+    ThemePage()
   } else {
     NavDestination() {
       Column() {
