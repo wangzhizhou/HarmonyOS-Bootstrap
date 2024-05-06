@@ -1,4 +1,4 @@
-import ItemList, { TabItem } from '../Components/List/ItemList';
+import ItemList, { TabItem } from './List/ItemList';
 
 @Preview({
   title: 'Tab'

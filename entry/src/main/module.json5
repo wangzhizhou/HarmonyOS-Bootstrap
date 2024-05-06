@@ -15,7 +15,7 @@
     "abilities": [
       {
         "name": "EntryAbility",
-        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "srcEntry": "./ets/Ability/EntryAbility/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
         "icon": "$media:icon",
         "label": "$string:EntryAbility_label",
@@ -32,6 +32,15 @@
             ]
           }
         ]
+      },
+      {
+        "name": "SettingsAbility",
+        "srcEntry": "./ets/Ability/SettingsAbility/SettingsAbility.ets",
+        "description": "$string:settingsAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:settingsAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background"
       }
     ],
     "requestPermissions": [
@@ -54,6 +63,39 @@
           ],
           "when": "inuse"
         }
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "AccessibilityExtAbility",
+        "srcEntry": "./ets/ExtensionAbility/Accessibility/AccessibilityExtAbility.ets",
+        "description": "$string:AccessibilityExtAbility_desc",
+        "label": "$string:AccessibilityExtAbility_label",
+        "type": "accessibility",
+        "metadata": [
+          {
+            "name": "ohos.accessibleability",
+            "resource": "$profile:accessibilityextability"
+          }
+        ]
+      },
+      {
+        "name": "WorkSchedulerExtAbility",
+        "srcEntry": "./ets/ExtensionAbility/Workscheduler/WorkSchedulerExtAbility.ets",
+        "type": "workScheduler"
+      },
+      {
+        "name": "EntryFormAbility",
+        "srcEntry": "./ets/ExtensionAbility/Widget/EntryFormAbility/EntryFormAbility.ets",
+        "label": "$string:EntryFormAbility_label",
+        "description": "$string:EntryFormAbility_desc",
+        "type": "form",
+        "metadata": [
+          {
+            "name": "ohos.extension.form",
+            "resource": "$profile:form_config"
+          }
+        ]
       }
     ]
   }

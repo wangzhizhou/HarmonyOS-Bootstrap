@@ -1,5 +1,5 @@
 import Tab from './Components/Tab'
-import { toast } from '../utils/utils'
+import { toast } from '../Utils/utils'
 import navDestinationBuilder from './navConfig'
 
 @Entry

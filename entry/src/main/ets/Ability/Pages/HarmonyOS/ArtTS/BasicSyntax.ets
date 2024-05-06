@@ -1,4 +1,8 @@
-import { toast } from '../../../utils/utils';
+import { toast } from '../../../Utils/utils';
+import bundleManager from '@ohos.bundle.bundleManager';
+import { bundleInfo }  from '../../../Utils/permissions';
+import common from '@ohos.app.ability.common';
+import Want from '@ohos.app.ability.Want';
 
 class RefParam {
   text: string = ''
@@ -10,6 +14,7 @@ export default struct BasicSyntax {
   @State title: string = 'Basic Syntax'
   @State count: number = 0
   @State text: string = 'origin value'
+  context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext
 
   build() {
     NavDestination() {
@@ -68,6 +73,16 @@ export default struct BasicSyntax {
           .onClick(() => {
             this.text = `new value ${this.count++}`
           })
+        Button("open feature")
+          .onClick(() => {
+            bundleInfo().then((info: bundleManager.BundleInfo) => {
+              let want: Want = {
+                bundleName: info.name,
+                abilityName: 'com.huawei.hmos.settings.MainAbility',
+              }
+              this.context.startAbility(want)
+            })
+          })
       }
       .height('100%')
       .width('100%')
@@ -89,6 +104,7 @@ export default struct BasicSyntax {
   refPassBuilder($$: RefParam) {
     Text(`ref pass builder: ${$$.text}`)
   }
+
 }
 
 @Preview

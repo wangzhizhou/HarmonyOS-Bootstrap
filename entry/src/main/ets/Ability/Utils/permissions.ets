@@ -6,11 +6,11 @@ import Want from '@ohos.app.ability.Want';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import rpc from '@ohos.rpc';
 
-async function bundleInfo(): Promise<bundleManager.BundleInfo> {
+export async function bundleInfo(): Promise<bundleManager.BundleInfo> {
   return await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
 }
 
-async function appInfo(): Promise<bundleManager.ApplicationInfo> {
+export async function appInfo(): Promise<bundleManager.ApplicationInfo> {
   let bundle: bundleManager.BundleInfo = await bundleInfo();
   return bundle.appInfo
 }

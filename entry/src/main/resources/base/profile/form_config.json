@@ -1,0 +1,130 @@
+{
+  "forms": [
+    {
+      "name": "statictextwidget",
+      "displayName": "$string:StaticTextWidget_name",
+      "description": "$string:StaticTextWidget_desc",
+      "src": "./ets/ExtensionAbility/Widget/Static/Text/pages/TextWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": false,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    },
+    {
+      "name": "staticimagewidget",
+      "displayName": "$string:StaticImageWidget_name",
+      "description": "$string:StaticImageWidget_desc",
+      "src": "./ets/ExtensionAbility/Widget/Static/Image/pages/ImageWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": false,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    },
+    {
+      "name": "staticimmersivewidget",
+      "displayName": "$string:StaticImmersive_name",
+      "description": "$string:StaticImmersive_desc",
+      "src": "./ets/ExtensionAbility/Widget/Static/Immersive/pages/ImmersiveWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": false,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    },
+    {
+      "name": "DTextWidget",
+      "displayName": "$string:DTextWidget_name",
+      "description": "$string:DTextWidget_desc",
+      "src": "./ets/ExtensionAbility/Widget/Dynamic/Text/pages/DTextWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    },
+    {
+      "name": "DImageWidget",
+      "displayName": "$string:DImageWidget_name",
+      "description": "$string:DImageWidget_desc",
+      "src": "./ets/ExtensionAbility/Widget/Dynamic/Image/pages/DImageWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    },
+    {
+      "name": "DImmersive",
+      "displayName": "$string:DImmersive_name",
+      "description": "$string:DImmersive_desc",
+      "src": "./ets/ExtensionAbility/Widget/Dynamic/Immersive/pages/DImmersiveWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    }
+  ]
+}

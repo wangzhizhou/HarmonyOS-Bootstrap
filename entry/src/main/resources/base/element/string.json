@@ -19,6 +19,94 @@
     {
       "name": "calendar_permission_reason",
       "value": "request calendar permission"
+    },
+    {
+      "name": "settingsAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "settingsAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "AccessibilityExtAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "AccessibilityExtAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "StaticTextWidget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "StaticTextWidget_name",
+      "value": "static text widget"
+    },
+    {
+      "name": "StaticImageWidget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "StaticImageWidget_name",
+      "value": "static image widget"
+    },
+    {
+      "name": "card_title",
+      "value": "Title"
+    },
+    {
+      "name": "introduction",
+      "value": "Introduction"
+    },
+    {
+      "name": "StaticImmersive_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "StaticImmersive_name",
+      "value": "static immersive widget"
+    },
+    {
+      "name": "title_immersive",
+      "value": "Today's delicious food"
+    },
+    {
+      "name": "detail_immersive",
+      "value": "A bowl of fragrant fried noodles, back to childhood memories"
+    },
+    {
+      "name": "DTextWidget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "DTextWidget_name",
+      "value": "widget"
+    },
+    {
+      "name": "DImageWidget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "DImageWidget_name",
+      "value": "widget"
+    },
+    {
+      "name": "DImmersive_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "DImmersive_name",
+      "value": "widget"
     }
   ]
 }

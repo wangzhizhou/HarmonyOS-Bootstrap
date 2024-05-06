@@ -4,8 +4,8 @@ import {
   checkAccessToken,
   openPermissionsInSystemSettings,
   getUIAbilityContext
-} from '../../../utils/permissions'
-import { toast, setPasteboardString } from '../../../utils/utils'
+} from '../../../Utils/permissions'
+import { toast, setPasteboardString } from '../../../Utils/utils'
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl'
 
 @Entry

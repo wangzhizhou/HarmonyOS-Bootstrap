@@ -1,5 +1,6 @@
 {
   "src": [
-    "pages/Home"
+    "Ability/Pages/Home",
+    "Ability/Pages/Index"
   ]
 }
