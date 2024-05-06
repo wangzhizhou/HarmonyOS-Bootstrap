@@ -43,6 +43,22 @@
           ]
         }
       ]
+    },
+    {
+      "name": "HSP",
+      "srcPath": "./HSP",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HAR",
+      "srcPath": "./HAR"
     }
   ]
 }
