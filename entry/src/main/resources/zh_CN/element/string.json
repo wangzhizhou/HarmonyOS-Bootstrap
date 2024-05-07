@@ -21,6 +21,10 @@
       "value": "请求日历权限"
     },
     {
+      "name": "contacts_permission_reason",
+      "value": "request contacts permission"
+    },
+    {
       "name": "settingsAbility_desc",
       "value": "description"
     },

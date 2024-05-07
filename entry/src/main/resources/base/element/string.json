@@ -21,6 +21,10 @@
       "value": "request calendar permission"
     },
     {
+      "name": "contacts_permission_reason",
+      "value": "request contacts permission"
+    },
+    {
       "name": "settingsAbility_desc",
       "value": "description"
     },
