@@ -1,5 +1,6 @@
 import {
   requestPermissionFromUser,
+  requestPermissionsFromUser,
   allPermissions,
   checkAccessToken,
   openPermissionsInSystemSettings,
@@ -95,6 +96,20 @@ export default struct PermissionsComponent {
             Button('跳转设置页')
               .onClick(() => {
                 openPermissionsInSystemSettings(getUIAbilityContext(this))
+              })
+            Button('定位')
+              .onClick(() => {
+                checkAccessToken("ohos.permission.APPROXIMATELY_LOCATION")
+                  .then((grantStatus: abilityAccessCtrl.GrantStatus) => {
+                    if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+                      requestPermissionsFromUser(this, [
+                        "ohos.permission.APPROXIMATELY_LOCATION",
+                        "ohos.permission.LOCATION",
+                      // "ohos.permission.LOCATION_IN_BACKGROUND",
+                      ]).then((grantStatus) => {
+                      })
+                    }
+                  })
               })
           }
           .width('100%')

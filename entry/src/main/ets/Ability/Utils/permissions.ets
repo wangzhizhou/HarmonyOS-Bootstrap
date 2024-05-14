@@ -4,7 +4,6 @@ import { BusinessError } from '@ohos.base';
 import common from '@ohos.app.ability.common';
 import Want from '@ohos.app.ability.Want';
 import UIAbility from '@ohos.app.ability.UIAbility';
-import rpc from '@ohos.rpc';
 
 export async function bundleInfo(): Promise<bundleManager.BundleInfo> {
   return await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
@@ -51,6 +50,21 @@ export async function requestPermissionFromUser(caller: Object, permission: Perm
     if (length == 1) {
       grantStatus = authResults[0]
     }
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to check access token. Code is ${err.code}, message is ${err.message}`);
+  }
+  return grantStatus;
+}
+
+export async function requestPermissionsFromUser(caller: Object, permissions: Permissions[]): Promise<abilityAccessCtrl.GrantStatus[]> {
+  let grantStatus = permissions.map(e => abilityAccessCtrl.GrantStatus.PERMISSION_DENIED)
+  let context: common.UIAbilityContext = getUIAbilityContext(caller)
+  try {
+    let requestResults: PermissionRequestResult = await abilityAccessCtrl.createAtManager()
+      .requestPermissionsFromUser(context, permissions)
+    let authResults = requestResults.authResults.map(e => e as abilityAccessCtrl.GrantStatus )
+    return authResults
   } catch (error) {
     let err: BusinessError = error as BusinessError;
     console.error(`Failed to check access token. Code is ${err.code}, message is ${err.message}`);
@@ -392,22 +406,3 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.TRIGGER_ACTIVATIONLOCK',
   'ohos.permission.MANAGE_SYSTEM_AUDIO_EFFECTS',
 ]
-
-// 提供外部调用方使用的能力
-class Stub extends rpc.RemoteObject {
-  onRemoteMessageRequest(code: number, data: rpc.MessageSequence, reply: rpc.MessageSequence, option: rpc.MessageOption) {
-    let callerTokenId: number = rpc.IPCSkeleton.getCallingTokenId();
-    abilityAccessCtrl.createAtManager().checkAccessToken(callerTokenId, "ohos.permission.ACCELEROMETER")
-      .then((grantStatus: abilityAccessCtrl.GrantStatus) => {
-        if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          console.log('granted');
-        } else {
-          console.log('denied');
-        }
-      })
-      .catch((err: BusinessError) => {
-        console.log(`checkAccessToken fail, err->${JSON.stringify(err)}`);
-      });
-    return true;
-  }
-}
