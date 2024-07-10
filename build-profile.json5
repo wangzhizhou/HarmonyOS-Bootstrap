@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/bytedance/.ohos/config/default_Bootstrap_fR4FEyZFZ4FmFKiBrGlFQ89hABacQbTtj0pburzG8Ds=.cer",
-          "storePassword": "0000001BAF625976EBA93EE49B6A9D7B630C8574642F48588B6FBEE0196F220FD0823EC970D56082FAFA83",
+          "certpath": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.cer",
+          "storePassword": "0000001B683845CD091FE1757E1FA571AB7C31F65B0153F720C699A777BA9612E61F560B86B2AAF7A03700",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B6DD0FF58E035C8D9DDA21E5A9D4886B37ECA419FF05672AC516546CDEF3531285D92997258764A",
-          "profile": "/Users/bytedance/.ohos/config/default_Bootstrap_fR4FEyZFZ4FmFKiBrGlFQ89hABacQbTtj0pburzG8Ds=.p7b",
+          "keyPassword": "0000001B9F6BDCAAF00CDDB9AC483139D1C6A23C467E6BE390B521F4D3C31EF616BECA71DBDA96F78C3888",
+          "profile": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/bytedance/.ohos/config/default_Bootstrap_fR4FEyZFZ4FmFKiBrGlFQ89hABacQbTtj0pburzG8Ds=.p12"
+          "storeFile": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.p12"
         }
       }
     ],

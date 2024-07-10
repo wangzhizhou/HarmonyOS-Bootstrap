@@ -39,7 +39,8 @@ export async function checkAccessToken(permission: Permissions): Promise<ability
   return grantStatus;
 }
 
-export async function requestPermissionFromUser(caller: Object, permission: Permissions): Promise<abilityAccessCtrl.GrantStatus> {
+export async function requestPermissionFromUser(caller: Object,
+  permission: Permissions): Promise<abilityAccessCtrl.GrantStatus> {
   let grantStatus: abilityAccessCtrl.GrantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_DENIED;
   let context: common.UIAbilityContext = getUIAbilityContext(caller)
   try {
@@ -57,13 +58,14 @@ export async function requestPermissionFromUser(caller: Object, permission: Perm
   return grantStatus;
 }
 
-export async function requestPermissionsFromUser(caller: Object, permissions: Permissions[]): Promise<abilityAccessCtrl.GrantStatus[]> {
+export async function requestPermissionsFromUser(caller: Object,
+  permissions: Permissions[]): Promise<abilityAccessCtrl.GrantStatus[]> {
   let grantStatus = permissions.map(e => abilityAccessCtrl.GrantStatus.PERMISSION_DENIED)
   let context: common.UIAbilityContext = getUIAbilityContext(caller)
   try {
     let requestResults: PermissionRequestResult = await abilityAccessCtrl.createAtManager()
       .requestPermissionsFromUser(context, permissions)
-    let authResults = requestResults.authResults.map(e => e as abilityAccessCtrl.GrantStatus )
+    let authResults = requestResults.authResults.map(e => e as abilityAccessCtrl.GrantStatus)
     return authResults
   } catch (error) {
     let err: BusinessError = error as BusinessError;
@@ -73,7 +75,8 @@ export async function requestPermissionsFromUser(caller: Object, permissions: Pe
 }
 
 export function getUIAbilityContext(object: Object): common.UIAbilityContext {
-  let context: common.UIAbilityContext = (object instanceof UIAbility) ? object.context : (getContext(object) as common.UIAbilityContext || object as common.UIAbilityContext);
+  let context: common.UIAbilityContext = (object instanceof UIAbility) ? object.context :
+    (getContext(object) as common.UIAbilityContext || object as common.UIAbilityContext);
   return context
 }
 
@@ -98,6 +101,7 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.MANAGE_BLUETOOTH',
   'ohos.permission.ACCESS_BLUETOOTH',
   'ohos.permission.GET_BLUETOOTH_LOCAL_MAC',
+  'ohos.permission.GET_BLUETOOTH_PEERS_MAC',
   'ohos.permission.INTERNET',
   'ohos.permission.MODIFY_AUDIO_SETTINGS',
   'ohos.permission.ACCESS_NOTIFICATION_POLICY',
@@ -163,6 +167,7 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.UPDATE_CONFIGURATION',
   'ohos.permission.UPDATE_SYSTEM',
   'ohos.permission.FACTORY_RESET',
+  'ohos.permission.ASSIST_DEVICE_UPDATE',
   'ohos.permission.UPDATE_MIGRATE',
   'ohos.permission.GRANT_SENSITIVE_PERMISSIONS',
   'ohos.permission.REVOKE_SENSITIVE_PERMISSIONS',
@@ -253,6 +258,9 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.ENTERPRISE_MANAGE_USB',
   'ohos.permission.ENTERPRISE_MANAGE_NETWORK',
   'ohos.permission.ENTERPRISE_SET_BROWSER_POLICY',
+  'ohos.permission.ENTERPRISE_OPERATE_DEVICE',
+  'ohos.permission.ENTERPRISE_ADMIN_MANAGE',
+  'ohos.permission.ENTERPRISE_CONFIG',
   'ohos.permission.NFC_TAG',
   'ohos.permission.NFC_CARD_EMULATION',
   'ohos.permission.PERMISSION_USED_STATS',
@@ -339,6 +347,8 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.QUERY_ACCESSIBILITY_ELEMENT',
   'ohos.permission.ACTIVATE_THEME_PACKAGE',
   'ohos.permission.ATTEST_KEY',
+  'ohos.permission.WAKEUP_VOICE',
+  'ohos.permission.WAKEUP_VISION',
   'ohos.permission.ENABLE_DISTRIBUTED_HARDWARE',
   'ohos.permission.ACCESS_DISTRIBUTED_HARDWARE',
   'ohos.permission.INSTANTSHARE_SWITCH_CONTROL',
@@ -361,7 +371,6 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.INPUT_CONTROL_DISPATCHING',
   'ohos.permission.ACCESS_OUC',
   'ohos.permission.TRUSTED_RING_HASH_DATA_PERMISSION',
-  'ohos.permission.QUERY_TRUSTED_RING_USER_INFO',
   'ohos.permission.MANAGE_TRUSTED_RING',
   'ohos.permission.USE_TRUSTED_RING',
   'ohos.permission.RECORD_VOICE_CALL',
@@ -373,6 +382,8 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.ACCESS_ADVANCED_SECURITY_MODE',
   'ohos.permission.USE_SECURITY_PRIVACY_MESSAGER',
   'ohos.permission.ACCESS_PASSWORDVAULT_ABILITY',
+  'ohos.permission.ACCESS_PRIVATE_SPACE_MANAGER',
+  'ohos.permission.ACCESS_PRIVATE_SPACE_PASSWORD_PROTECT',
   'ohos.permission.STORE_PERSISTENT_DATA',
   'ohos.permission.ACCESS_HIVIEWX',
   'ohos.permission.ACCESS_LOWPOWER_MANAGER',
@@ -398,11 +409,67 @@ export const allPermissions: Permissions[] = [
   'ohos.permission.ACCESS_STATUSBAR_ICON',
   'ohos.permission.START_SYSTEM_DIALOG',
   'ohos.permission.START_RECENT_ABILITY',
-  'ohos.permission.START_ABILITY_WITH_ANIMATION',
   'ohos.permission.READ_CLOUD_SYNC_CONFIG',
   'ohos.permission.MANAGE_CLOUD_SYNC_CONFIG',
   'ohos.permission.ACCESS_FINDDEVICE',
   'ohos.permission.MANAGE_FINDSERVICE',
+  'ohos.permission.READ_FINDSERVICE',
   'ohos.permission.TRIGGER_ACTIVATIONLOCK',
   'ohos.permission.MANAGE_SYSTEM_AUDIO_EFFECTS',
+  'ohos.permission.MANAGE_NEARLINK',
+  'ohos.permission.ACCESS_NEARLINK',
+  'ohos.permission.GET_NEARLINK_LOCAL_MAC',
+  'ohos.permission.GET_NEARLINK_PEER_MAC',
+  'ohos.permission.ACCESS_PROTOCOL_DFX_STATE',
+  'ohos.permission.MANAGE_RGM',
+  'ohos.permission.ALLOW_UPGRADE_GUIDE_ACCESS',
+  'ohos.permission.READ_ACCOUNT_LOGIN_STATE',
+  'ohos.permission.WRITE_ACCOUNT_LOGIN_STATE',
+  'ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_AS_USER',
+  'ohos.permission.ACCESS_PROTOCOL_DFX_DATA',
+  'ohos.permission.ACCESS_AI_ABILITY',
+  'ohos.permission.MANAGE_USER_ACCOUNT_INFO',
+  'ohos.permission.NOTIFY_DEBUG_ASSERT_RESULT',
+  'ohos.permission.QUERY_PASSWORD_VAULT_DATA',
+  'ohos.permission.SUBSCRIBE_NOTIFICATION_WINDOW_STATE',
+  'ohos.permission.CHANGE_DISPLAYMODE',
+  'ohos.permission.ACCESS_MEDIALIB_THUMB_DB',
+  'ohos.permission.GET_PRIVACY_INDICATOR',
+  'ohos.permission.SET_PRIVACY_INDICATOR',
+  'ohos.permission.EXEMPT_PRIVACY_INDICATOR',
+  'ohos.permission.SET_SUPER_PRIVACY',
+  'ohos.permission.MIGRATE_DATA',
+  'ohos.permission.ACCESS_DYNAMIC_ICON',
+  'ohos.permission.CHANGE_BUNDLE_UNINSTALL_STATE',
+  'ohos.permission.GET_SUPER_PRIVACY',
+  'ohos.permission.LAUNCH_SPAMSHIELD_PAGE',
+  'ohos.permission.ACCESS_SPAMSHIELD_SERVICE',
+  'ohos.permission.WRITE_GTOKEN_POLICY',
+  'ohos.permission.READ_GTOKEN_POLICY',
+  'ohos.permission.ENABLE_PROFILER',
+  'ohos.permission.USE_CLOUD_DRIVE_SERVICE',
+  'ohos.permission.USE_CLOUD_BACKUP_SERVICE',
+  'ohos.permission.USE_CLOUD_COMMON_SERVICE',
+  'ohos.permission.MANAGE_STYLUS_EVENT',
+  'ohos.permission.ACCESS_SERVICE_NAVIGATION_INFO',
+  'ohos.permission.PRELOAD_APPLICATION',
+  'ohos.permission.ACCESS_TEXTAUTOFILL_ABILITY',
+  'ohos.permission.ACCESS_LOCAL_BACKUP',
+  'ohos.permission.CAST_AUDIO_OUTPUT',
+  'ohos.permission.MANAGE_INPUT_INFRARED_EMITTER',
+  'ohos.permission.START_SHORTCUT',
+  'ohos.permission.GET_ACCOUNT_MINORS_INFO',
+  'ohos.permission.KILL_APP_PROCESSES',
+  'ohos.permission.ACCESS_SCREEN_LOCK_MEDIA_DATA',
+  'ohos.permission.ACCESS_SCREEN_LOCK_ALL_DATA',
+  'ohos.permission.ACCESS_LOCAL_THEME',
+  'ohos.permission.INSTALL_CLONE_BUNDLE',
+  'ohos.permission.UNINSTALL_CLONE_BUNDLE',
+  'ohos.permission.ACCESS_SHADER_CACHE_DIR',
+  'ohos.permission.ACCESS_SYSTEM_APP_CERT',
+  'ohos.permission.ACCESS_USER_TRUSTED_CERT',
+  'ohos.permission.PROTECT_SCREEN_LOCK_DATA',
+  'ohos.permission.PRELOAD_UI_EXTENSION_ABILITY',
+  'ohos.permission.ACCESS_DEVICE_COLLABORATION_PRIVATE_ABILITY',
+  'ohos.permission.INJECT_INPUT_EVENT',
 ]

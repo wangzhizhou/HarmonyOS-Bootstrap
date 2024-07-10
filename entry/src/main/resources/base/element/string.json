@@ -25,6 +25,10 @@
       "value": "request contacts permission"
     },
     {
+      "name": "location_permission_reason",
+      "value": "request location permission"
+    },
+    {
       "name": "settingsAbility_desc",
       "value": "description"
     },

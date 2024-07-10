@@ -76,6 +76,7 @@
       },
       {
         "name": "ohos.permission.LOCATION_IN_BACKGROUND",
+        "reason": "$string:location_permission_reason",
         "usedScene": {
           "abilities": [
             "EntryAbility"
@@ -85,6 +86,7 @@
       },
       {
         "name": "ohos.permission.LOCATION",
+        "reason": "$string:location_permission_reason",
         "usedScene": {
           "abilities": [
             "EntryAbility"
@@ -94,6 +96,7 @@
       },
       {
         "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:location_permission_reason",
         "usedScene": {
           "abilities": [
             "EntryAbility"
