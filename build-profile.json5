@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.cer",
-          "storePassword": "0000001B683845CD091FE1757E1FA571AB7C31F65B0153F720C699A777BA9612E61F560B86B2AAF7A03700",
+          "certpath": "/Users/bytedance/.ohos/config/default_HarmonyOS-Bootstrap_ydnqygq3fy00gKcFhEwpmQuG0UztNvA29IMQEkKrhG4=.cer",
+          "storePassword": "0000001BE4AA02EAB9FD71D2A6B9DE658ACB7B9F7573BA2A1C09419DC9334A68D4C8A9D8381D9ED7FFF58D",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B9F6BDCAAF00CDDB9AC483139D1C6A23C467E6BE390B521F4D3C31EF616BECA71DBDA96F78C3888",
-          "profile": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.p7b",
+          "keyPassword": "0000001B19FB347F6CDC99996F85800FCCB44A5EDA6E497D058A5D11F390ACD62FF2409503A5ACF8A1759E",
+          "profile": "/Users/bytedance/.ohos/config/default_HarmonyOS-Bootstrap_ydnqygq3fy00gKcFhEwpmQuG0UztNvA29IMQEkKrhG4=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/wangzhizhou/.ohos/config/default_HarmonyOS-Bootstrap_nx34l2juO1pqVeL9n58G99L5KaGJkTZm5g3OxIiXXlk=.p12"
+          "storeFile": "/Users/bytedance/.ohos/config/default_HarmonyOS-Bootstrap_ydnqygq3fy00gKcFhEwpmQuG0UztNvA29IMQEkKrhG4=.p12"
         }
       }
     ],
@@ -19,7 +19,7 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "4.1.0(11)",
+        "compatibleSdkVersion": "5.0.1(13)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {

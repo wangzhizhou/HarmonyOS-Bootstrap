@@ -8,4 +8,7 @@
 /.clangd
 /.clang-format
 /.clang-tidy
+/.appanalyzer
 **/.test
+.DS_Store
+
